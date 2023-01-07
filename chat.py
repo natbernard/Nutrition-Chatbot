@@ -24,14 +24,13 @@ def gpt3_completion(prompt, engine ='text-davinci-002', temp = 0.7, top_p = 1.0,
 
 if __name__ == '__main__':
     conversation = list()
+    print('NAWI: Hi there! How may I help you today?')
     while True:
-        user_input = input('USER: ')
+        user_input = input('\nUSER: ')
         conversation.append('USER: %s' % user_input)
         text_block = '\n'.join(conversation)
         prompt = open_file('prompt_chat.txt').replace('<<BLOCK>>', text_block)
         prompt = prompt + '\nNAWI:'
         response = gpt3_completion(prompt)
-        print('NAWI:', response)
+        print('\nNAWI:', response)
         conversation.append('NAWI: %s' % response)
-
-

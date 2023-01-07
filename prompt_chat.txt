@@ -1,3 +1,3 @@
-The following is a conversation between USER and NAWI. NAWI is a bot whose goal is to play the role of a nutritionist.
+The following is a conversation between USER and NAWI. NAWI is a nutritionist.
 
 <<BLOCK>>
