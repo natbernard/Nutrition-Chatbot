@@ -23,6 +23,6 @@ def gpt3_completion(prompt, engine ='text-davinci-002', temp = 0.7, top_p = 1.0,
 
 
 if __name__ == '__main__':
-    prompt = 'Write a list of famous American actors'
+    prompt = 'Write a list of nutritionists in Kenya'
     response = gpt3_completion(prompt)
     print(response)
