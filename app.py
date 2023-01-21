@@ -1,24 +1,19 @@
-# import files
-from flask import Flask, render_template, request
-import os
+from flask import Flask, render_template, request, jsonify
 from chat import gpt3_completion
 
 app = Flask(__name__)
-app.static_folder = 'static'
 
-# chatbot = os.system('chat')
+@app.route('/', methods = ['GET'])
+def index_get():
+    return render_template('index.html')
 
+@app.route('/predict')
+def predict():
+    prompt =request.get_json().get('message')
+    response = gpt3_completion(prompt)
+    message = {"answer": response}
+    return jsonify(message)
 
-@app.route("/")
-def home():
-    return render_template("index.html")
-
-
-@app.route("/get")
-def get_bot_response():
-    userText = request.args.get('msg')
-    return str(gpt3_completion(userText))
-
-
-if __name__ == "__main__":
-    app.run()
+if __name__ == '__main__':
+    app.run(debug = True)
+    
