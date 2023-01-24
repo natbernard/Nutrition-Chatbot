@@ -3,11 +3,11 @@ from chat import gpt3_completion
 
 app = Flask(__name__)
 
-@app.route('/', methods = ['GET'])
+@app.get('/')
 def index_get():
     return render_template('index.html')
 
-@app.route('/predict')
+@app.post('/predict')
 def predict():
     prompt =request.get_json().get('message')
     response = gpt3_completion(prompt)
