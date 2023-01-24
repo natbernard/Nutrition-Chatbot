@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-from chat import gpt3_completion
+from chat import gpt3_completion, open_file
 
 app = Flask(__name__)
 
@@ -9,10 +9,18 @@ def index_get():
 
 @app.post('/predict')
 def predict():
-    prompt =request.get_json().get('message')
-    response = gpt3_completion(prompt)
-    message = {"answer": response}
-    return jsonify(message)
+    conversation = list()
+    print('NAWI: Hi there! How may I help you today?')
+    while True:
+        user_input = request.get_json().get('message')
+        conversation.append('USER: %s' % user_input)
+        text_block = '\n'.join(conversation)
+        prompt = open_file('prompt_chat.txt').replace('<<BLOCK>>', text_block)
+        prompt = prompt + '\nNAWI:'
+        response = gpt3_completion(prompt)
+        message = {"answer": response}
+        conversation.append('NAWI: %s' % response)
+        return jsonify(message)
 
 if __name__ == '__main__':
     app.run(debug = True)
