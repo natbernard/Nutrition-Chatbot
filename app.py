@@ -10,7 +10,6 @@ def index_get():
 @app.post('/predict')
 def predict():
     conversation = list()
-    print('NAWI: Hi there! How may I help you today?')
     while True:
         user_input = request.get_json().get('message')
         conversation.append('USER: %s' % user_input)
